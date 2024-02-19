@@ -9,4 +9,16 @@
         That’s why we’ve curated a collection of spaces designed to foster community, ignite inspiration, and power your workdays. <br>
         With us, it’s simple — enjoy the grind, leave the rest behind.
     </p>
+
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.email.label }} <br>
+            {{ form.email(cols=32, rows=1)}} <br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
 {% endblock %}

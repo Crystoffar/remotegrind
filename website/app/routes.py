@@ -1,12 +1,16 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
-from app.forms import ContactForm
+from app.forms import ContactForm, WaitlistForm
 from app.models import Ticket
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    form = WaitlistForm()
+    if form.validate_on_submit():
+        flash('You have been added to the waitlist!')
+        return redirect(url_for('index'))
+    return render_template('index.html', title='Home', form=form)
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
