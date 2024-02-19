@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% if title %}
+            <title>{{ title }} - The Remote Grind</title>
+        {% else %}
+            <title>Welcome to The Remote Grind!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>The Remote Grind: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
