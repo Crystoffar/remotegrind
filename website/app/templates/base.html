@@ -4,12 +4,25 @@
         {% if title %}
             <title>{{ title }} - The Remote Grind</title>
         {% else %}
-            <title>Welcome to The Remote Grind!</title>
+            <title>The Remote Grind</title>
         {% endif %}
     </head>
     <body>
-        <div>The Remote Grind: <a href="/index">Home</a></div>
+        <div>
+            The Remote Grind: 
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </div>
         <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </body>
 </html>
