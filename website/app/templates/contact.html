@@ -2,17 +2,21 @@
 {% import 'bootstrap_wtf.html' as wtf %}
 
 {% block content %}
-    <div class="container">
-        <div class="text-center">
-            <h2>Contact Us</h2  >
-            <p>
-            <br>
-            The Remote Grind is gearing up for a soft launch, starting with locations in Costa Mesa, CA. <br><br>
-            We'd love to hear your ideas and advice as we curate a collection of exceptional workspaces. <br><br>
-            Share your thoughts with us!
-            </p>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <h2>Contact Us</h2>
+                <p>
+                    The Remote Grind is gearing up for a soft launch, <br>
+                    starting with locations in Costa Mesa, CA.<br><br>
+                    We'd love to hear your ideas and advice as we <br>
+                    curate a collection of exceptional workspaces.<br><br>
+                    Share your thoughts with us!
+                </p>
+            </div>
+            <div class="col-md-5">
+                {{ wtf.quick_form(form, form_field_macro=wtf.contact_form_field) }}
+            </div>
         </div>
     </div>
-  
-    {{ wtf.quick_form(form) }}
 {% endblock %}

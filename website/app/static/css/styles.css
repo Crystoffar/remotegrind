@@ -38,5 +38,11 @@ body {
 }
 
 h2 {
-    font-family: 'Apercu Pro Regular', sans-serif;
+    font-family: 'Palmer Lake Print', sans-serif;
+    font-size: 3rem;
+    color: #4B92FB;
+}
+
+.container.mt-4 {
+    margin-top: 4rem !important;
 }
