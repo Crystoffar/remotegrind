@@ -9,5 +9,5 @@ class ContactForm(FlaskForm):
     submit = SubmitField('Send')
 
 class WaitlistForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = StringField('name@email.com', validators=[DataRequired(), Email()])
     submit = SubmitField('Join Waitlist')

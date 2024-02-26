@@ -1,35 +1,18 @@
 {% extends "base.html" %}
+{% import 'bootstrap_wtf.html' as wtf %}
 
 {% block content %}
-    <h1>Contact Us</h1>
-    <p>
-        The Remote Grind is gearing up for a soft launch, starting with locations in Costa Mesa, CA. <br>
-        We'd love to hear your ideas and advice as we curate a collection of exceptional workspaces. <br>
-        Share your thoughts with us!
-    </p>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.name.label }} <br>
-            {{ form.name(size=32) }} <br>
-            {% for error in form.name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }} <br>
-            {{ form.email(size=32) }} <br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.message.label }} <br>
-            {{ form.message(cols=32, rows=4) }} <br>
-            {% for error in form.message.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container">
+        <div class="text-center">
+            <h2>Contact Us</h2  >
+            <p>
+            <br>
+            The Remote Grind is gearing up for a soft launch, starting with locations in Costa Mesa, CA. <br><br>
+            We'd love to hear your ideas and advice as we curate a collection of exceptional workspaces. <br><br>
+            Share your thoughts with us!
+            </p>
+        </div>
+    </div>
+  
+    {{ wtf.quick_form(form) }}
 {% endblock %}

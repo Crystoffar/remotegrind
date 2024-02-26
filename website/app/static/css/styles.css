@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Palmer Lake Print';
+  src: url('../fonts/PalmerLakePrint-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Apercu Pro Regular';
+    src: url('../fonts/Apercu Pro Regular.otf') format('opentype');
+}
+
+.navbar {
+    background-color: #FFFCF7 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    font-family: 'Palmer Lake Print', sans-serif;
+    color: #4B92FB;
+    font-size: 3rem;
+}
+
+.navbar-nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+.navbar-nav .nav-link.active {
+    text-decoration: underline;
+}
+
+body {
+    font-family: 'Apercu Pro Regular', sans-serif;
+    font-size: 14px;
+    background-color: #FFFCF7;
+}
+
+h2 {
+    font-family: 'Apercu Pro Regular', sans-serif;
+}
