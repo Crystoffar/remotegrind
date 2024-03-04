@@ -15,7 +15,16 @@
                 </p>
             </div>
             <div class="col-md-5">
-                {{ wtf.quick_form(form, form_field_macro=wtf.contact_form_field) }}
+                <form action="{{ formspark_url }}" method="POST">
+                    {{ wtf.quick_form(form, form_field_macro=wtf.contact_form_field) }}
+                    <input
+                        type="hidden"
+                        name="_redirect"
+                        value="{{ url_for('index') }}"
+                    />
+                    <input type="hidden" name="_subject" value="New Contact Form submission">
+                    <input type="hidden" name="_template" value="plain">
+                </form>
             </div>
         </div>
     </div>

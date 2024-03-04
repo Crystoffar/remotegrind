@@ -1,7 +1,8 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
 from app.forms import ContactForm, WaitlistForm
-from app.models import Ticket
+#from app.models import 
+from config import Config
 
 @app.route('/')
 @app.route('/index')
@@ -15,10 +16,5 @@ def index():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
-    if form.validate_on_submit():
-        ticket = Ticket(name=form.name.data, email=form.email.data, message=form.message.data)
-        db.session.add(ticket)
-        db.session.commit()
-        flash('Thank you, {}! Your message has been sent to The Remote Grind Team.'.format(form.name.data))
-        return redirect(url_for('index'))
-    return render_template('contact.html', title='Contact', form=form, active_page='contact')
+    formspark_url = Config.FORMSPARK_URL
+    return render_template('contact.html', title='Contact', form=form, active_page='contact', formspark_url=formspark_url)
