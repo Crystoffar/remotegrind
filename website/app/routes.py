@@ -16,5 +16,5 @@ def index():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
-    formspark_url = Config.FORMSPARK_URL
-    return render_template('contact.html', title='Contact', form=form, active_page='contact', formspark_url=formspark_url)
+    formspark_id = Config.FORMSPARK_ID
+    return render_template('contact.html', title='Contact', form=form, active_page='contact', formspark_id=formspark_id)
