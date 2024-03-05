@@ -15,5 +15,5 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['ADMIN_EMAIL']
-    WAITLIST_KEY = os.environ.get('WAITLIST_KEY')
     FORMSPARK_ID = os.environ.get('FORMSPARK_ID')
+    WAITLIST_ID = os.environ.get('WAITLIST_ID')

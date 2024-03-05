@@ -1,7 +1,8 @@
 {% extends "base.html" %}
-{% import 'bootstrap_wtf.html' as wtf %}
 
 {% block content %}
+    <div id="flash-message-container"></div>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -17,5 +18,52 @@
         </div>
     </div>
 
-    {{ wtf.quick_form(form, form_field_macro=wtf.form_field) }}
-{% endblock %}
+    <form id="waitlist-form" class="container mt-0" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form.email(class="form-control", placeholder="name@email.com") }}
+                </div>
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div id="error" class="text-center mt-2 text-danger"></div>
+
+    <script>
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var formData = new FormData(document.getElementById('waitlist-form'));
+            var email = formData.get('email');
+            
+            fetch('/', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('error').innerText = data.error;
+                } else {
+                    // Flash the success message
+                    var flashMessage = document.createElement('div');
+                    flashMessage.classList.add('alert', 'alert-success');
+                    flashMessage.innerText = 'You have been added to the waitlist!';
+                    document.getElementById('flash-message-container').appendChild(flashMessage);
+
+                    // Clear the email input
+                    document.getElementById('email').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+{% endblock %} 
