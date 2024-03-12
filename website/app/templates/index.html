@@ -1,69 +1,82 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div id="flash-message-container"></div>
 
-{% block content %}
-    <div id="flash-message-container"></div>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <img src="{{ url_for('static', filename='images/exampleshop.webp') }}" alt="coffee shop" class="img-fluid">
-                <p class="text-center">
-                    <br>
-                    Welcome to <span style="color: #4B92FB;">The Remote Grind</span>, your go-to platform for discovering the perfect places to work remotely — positive energy and productivity guaranteed.<br><br>
-                    Environment is everything for us remote professionals, and who says “wfh” has to mean working from home? 
-                    That’s why we’ve curated a collection of spaces designed to foster community, ignite inspiration, and power your workdays. <br><br>
-                    With us, it’s simple — enjoy the grind, leave the rest behind.
-                </p>
-            </div>
-        </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <img
+        src="{{ url_for('static', filename='images/exampleshop.webp') }}"
+        alt="coffee shop"
+        class="img-fluid"
+      />
+      <p class="text-center">
+        <br />
+        Welcome to
+        <span style="color: #4b92fb">The Remote Grind</span>
+        , your go-to platform for discovering the perfect places to work
+        remotely — positive energy and productivity guaranteed.
+        <br />
+        <br />
+        Environment is everything for us remote professionals, and who says
+        “wfh” has to mean working from home? That’s why we’ve curated a
+        collection of spaces designed to foster community, ignite inspiration,
+        and power your workdays.
+        <br />
+        <br />
+        With us, it’s simple — enjoy the grind, leave the rest behind.
+      </p>
     </div>
+  </div>
+</div>
 
-    <form id="waitlist-form" class="container mt-0" method="POST">
-        {{ form.hidden_tag() }}
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    {{ form.email(class="form-control", placeholder="name@email.com") }}
-                </div>
-                <div class="text-center">
-                    {{ form.submit(class="btn btn-primary") }}
-                </div>
-            </div>
-        </div>
-    </form>
+<form id="waitlist-form" class="container mt-0" method="POST">
+  {{ form.hidden_tag() }}
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="mb-3">
+        {{ form.email(class="form-control", placeholder="name@email.com") }}
+      </div>
+      <div class="text-center">{{ form.submit(class="btn btn-primary") }}</div>
+    </div>
+  </div>
+</form>
 
-    <div id="error" class="text-center mt-2 text-danger"></div>
+<div id="error" class="text-center mt-2 text-danger"></div>
 
-    <script>
-        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+<script>
+  document
+    .getElementById("waitlist-form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault()
 
-            var formData = new FormData(document.getElementById('waitlist-form'));
-            var email = formData.get('email');
-            
-            fetch('/', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    document.getElementById('error').innerText = data.error;
-                } else {
-                    // Flash the success message
-                    var flashMessage = document.createElement('div');
-                    flashMessage.classList.add('alert', 'alert-success');
-                    flashMessage.innerText = 'You have been added to the waitlist!';
-                    document.getElementById('flash-message-container').appendChild(flashMessage);
+      var formData = new FormData(document.getElementById("waitlist-form"))
+      var email = formData.get("email")
 
-                    // Clear the email input
-                    document.getElementById('email').value = '';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-    </script>
+      fetch("/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            document.getElementById("error").innerText = data.error
+          } else {
+            // Flash the success message
+            var flashMessage = document.createElement("div")
+            flashMessage.classList.add("alert", "alert-success")
+            flashMessage.innerText = "You have been added to the waitlist!"
+            document
+              .getElementById("flash-message-container")
+              .appendChild(flashMessage)
 
-{% endblock %} 
+            // Clear the email input
+            document.getElementById("email").value = ""
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+        })
+    })
+</script>
+
+{% endblock %}
