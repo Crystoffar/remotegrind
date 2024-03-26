@@ -20,3 +20,4 @@ class Config(object):
     FORMSPARK_ID = os.environ.get("FORMSPARK_ID")
     SERVICE_ACCOUNT_JSON = os.environ.get("SERVICE_ACCOUNT_JSON")
     WAITLIST_SHEET = os.environ.get("WAITLIST_SHEET")
+    MAPS_API = os.environ.get("MAPS_API")

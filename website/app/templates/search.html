@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div id="map" style="height: 400px"></div>
+  </div>
+</div>
+
+<script src="/google-maps-api"></script>
+
+<script>
+  function initMap() {
+    // city defaults to costa mesa for now
+    var city = {lat: 33.641132, lng: -117.918671}
+
+    var map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 13,
+      center: city,
+    })
+    /*
+    var marker = new google.maps.Marker({
+      position: city,
+      map: map,
+    })
+    */
+  }
+
+  window.onload = initMap
+</script>
+
+{% endblock %}

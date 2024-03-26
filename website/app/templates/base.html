@@ -53,6 +53,15 @@
                 Contact
               </a>
             </li>
+            <li class="nav-item">
+              <a
+                class="nav-link inter-font {% if active_page == 'search' %}active{% endif %}"
+                aria-current="page"
+                href="{{ url_for('search') }}"
+              >
+                Search
+              </a>
+            </li>
           </ul>
         </div>
       </div>
