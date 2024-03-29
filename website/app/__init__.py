@@ -14,6 +14,8 @@ migrate = Migrate(app, db)
 CORS(app)
 
 if not app.debug:
+    #TODO: Set up Mail Server for Logging.
+    '''
     if app.config["MAIL_SERVER"]:
         auth = None
         if app.config["MAIL_USERNAME"] or app.config["MAIL_PASSWORD"]:
@@ -31,7 +33,7 @@ if not app.debug:
         )
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
-
+    '''
     if not os.path.exists("logs"):
         os.mkdir("logs")
     file_handler = RotatingFileHandler(
