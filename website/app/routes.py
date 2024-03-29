@@ -41,16 +41,6 @@ def contact():
         formspark_id=formspark_id,
     )
 
-@app.route("/google-maps-api", methods=["GET"])
-def google_maps_proxy():
-    url = "https://maps.googleapis.com/maps/api/js"
-    params = {
-        "key": Config.MAPS_API, 
-        "libraries": "places",   
-    }
-    response = requests.get(url, params=params)
-    return response.text
-
 @app.route("/search", methods=["GET", "POST"])
 def search():
     maps_api = Config.MAPS_API
