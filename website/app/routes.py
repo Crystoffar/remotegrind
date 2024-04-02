@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import ContactForm, WaitlistForm
+from app.models import Place
 from config import Config
 import requests
 import gspread
@@ -54,9 +55,11 @@ def google_maps_proxy():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     maps_api = Config.MAPS_API
+    places = Place.query.all()
     return render_template(
         "search.html",
         title="Search",
         active_page="search",
         maps_api=maps_api,
+        places=places
     )

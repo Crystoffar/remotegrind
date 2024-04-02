@@ -1,10 +1,28 @@
 {% extends "base.html" %} {% block content %}
 <div class="row">
-  <div class="col-md-8 offset-md-2">
-    <div id="map" style="height: 400px"></div>
+  <div class="col-md-4">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        id="searchInput"
+        class="form-control"
+        placeholder="Search locations..."
+      />
+    </div>
+    <div class="list-group" id="locationsList">
+      {% for place in places %}
+      <a href="#" class="list-group-item list-group-item-action">
+        {{ place.name }}
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div id="map" style="height: calc(100vh - 80px)"></div>
   </div>
 </div>
 
+<!-- loads Google Maps API through proxy -->
 <script src="/google-maps-api"></script>
 
 <script>
@@ -16,12 +34,55 @@
       zoom: 13,
       center: city,
     })
-    /*
-    var marker = new google.maps.Marker({
-      position: city,
-      map: map,
-    })
-    */
+
+    //imports places from Place database in locations
+    var locations = [
+      {% for place in places %}
+        {
+          lat: {{ place.latitude }},
+          lng: {{ place.longitude }},
+          title: "{{ place.name }}"
+        },
+      {% endfor %}
+    ];
+
+    //creates markers for each location
+    locations.forEach(function(location) {
+      var marker = new google.maps.Marker({
+        position: {lat: location.lat, lng: location.lng},
+        map: map,
+        title: location.title
+      });
+    });
+
+    // Filter locations based on search input
+    document.getElementById('searchInput').addEventListener('input', function() {
+      var searchValue = normalizeString(this.value);
+      var filteredLocations = locations.filter(function(location) {
+        return normalizeString(location.title).includes(searchValue);
+      });
+      updateLocationsList(filteredLocations);
+    });
+
+    // Update the locations list
+    function updateLocationsList(filteredLocations) {
+      var locationsList = document.getElementById('locationsList');
+      locationsList.innerHTML = '';
+
+      filteredLocations.forEach(function(location) {
+        var link = document.createElement('a');
+        link.href = '#';
+        link.className = 'list-group-item list-group-item-action';
+        link.textContent = location.title;
+        locationsList.appendChild(link);
+      });
+    }
+
+    // Normalize a string by removing diacritical marks and converting to lowercase
+    // i.e. Nüdae Coffee -> nudae coffee
+    function normalizeString(str) {
+      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
   }
 
   window.onload = initMap
